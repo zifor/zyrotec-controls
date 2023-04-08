@@ -1,1 +1,13 @@
-<p>zt-tab-group works!</p>
+<button
+    *ngFor="let tab of tabs; index as i"
+    (click)="onSelectTab(tab, i)"
+>{{ tab.label || 'tab ' + i }}</button>
+
+<div
+    #content
+    *ngFor="let tab of tabs; index as i"
+>
+    <ng-container *ngIf="tab.isActive">
+        <ng-container [ngTemplateOutlet]="tab.content"></ng-container>
+    </ng-container>
+</div>
