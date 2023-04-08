@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:testing": "ng build zyrotec-controls-testing --open",
+    "serve:testing": "ng serve zyrotec-controls-testing --open",
     "build:controls": "ng build zyrotec-controls --watch"
   },
   "private": true,
