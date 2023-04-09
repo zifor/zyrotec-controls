@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy } from '@angular/compiler';
+import { Component, ElementRef, Input, OnInit, TemplateRef, ViewChild, AfterViewInit, ViewContainerRef, EmbeddedViewRef, AfterViewChecked } from '@angular/core';
 
 @Component({
     selector: 'zt-tab',

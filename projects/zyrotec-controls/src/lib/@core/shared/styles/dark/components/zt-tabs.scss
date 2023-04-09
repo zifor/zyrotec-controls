@@ -1,0 +1,178 @@
+.zt-tab-bar-container {
+    width: 100%;
+    position: relative;
+    margin: 0 0 4px 0;
+    display: flex;
+    justify-content: center;
+
+    .zt-tab-bar-scroll-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 4px;
+        margin: 4px 0 5px 0;
+        flex-shrink: 0;
+        background: transparent;
+        color: #fff;
+        border: none;
+
+        i {
+            font-size: 10px;
+        }
+    }
+
+    .zt-tab-bar-scroll-button-left {
+        border-right: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .zt-tab-bar-scroll-button-right {
+        border-left: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .zt-tab-bar-wrapper {
+        position: relative;
+        margin: 0 4px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        box-sizing: border-box;
+        scroll-behavior: smooth;
+
+        overflow: hidden;
+
+        .zt-tab-bar {
+            position: relative;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+            transition: transform 0.175s ease-in-out;
+
+            .zt-tab-bar-item {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 8px 16px;
+                background: transparent;
+                border: none;
+                color: rgba(255, 255, 255, 0.25);
+                white-space: nowrap;
+                line-height: 10pt;
+                -webkit-font-smoothing: antialiased;
+
+                transition: color 0.175s ease-in-out;
+
+                &:hover {
+                    color: rgba(255, 255, 255, 0.75)
+                }
+            }
+        }
+
+        .zt-tab-bar-item-slider-container {
+            width: 100%;
+
+            transition: transform 0.175s ease-in-out;
+
+            .zt-tab-bar-item-slider {
+                height: 1px;
+                background: #fff;
+                border-radius: 0px;
+                box-sizing: border-box;
+
+                transition: transform 0.3s ease-in-out, width 0.3s ease-in-out;
+            }
+        }
+
+        .zt-tab-bar-scroll-overlay {
+            position: absolute;
+            height: 28px;
+            width: 100%;
+            pointer-events: none;
+
+            .zt-tab-bar-scroll-overlay-left {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 50%;
+                background: linear-gradient(90deg, rgb(35, 35, 35) 0%, rgba(35, 35, 35, 0.5) 60%, transparent 100%);
+                pointer-events: none;
+            }
+
+            .zt-tab-bar-scroll-overlay-right {
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 100%;
+                width: 50%;
+                background: linear-gradient(90deg, transparent 0%, rgba(35, 35, 35, 0.5) 40%, rgb(35, 35, 35) 100%);
+                pointer-events: none;
+            }
+        }
+    }
+}
+
+.zt-tab-content-wrapper {
+    position: relative;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow: hidden !important;
+
+    transition: all 0.3s ease-in-out;
+
+    .zt-tab-content-container {
+        // position: absolute;
+        width: 100%;
+        box-sizing: border-box;
+
+        .zt-tab-content {
+            width: 100%;
+            transform: translate(0);
+        }
+    }
+}
+
+.zt-tab-bar-mask {
+    mask-image: linear-gradient(90deg, transparent 0px, black 100px, black calc(100% - 100px), transparent 100%);
+    mask-mode: alpha;
+}
+
+.zt-tab-bar-mask-right {
+    mask-image: linear-gradient(90deg, black calc(100% - 100px), transparent 100%);
+    mask-mode: alpha;
+}
+
+.zt-tab-bar-mask-left {
+    mask-image: linear-gradient(90deg, transparent 0px, black 150px);
+    mask-mode: alpha;
+}
+
+.zt-tab-bar-item-focused {
+    color: #fff !important;
+}
+
+@media screen and (max-width: 420px) {
+    .zt-tab-bar-container {
+        .zt-tab-bar-wrapper {
+            // overflow: auto;
+        }
+    }
+
+    .zt-tab-bar-mask {
+        mask-image: linear-gradient(90deg, transparent 0px, black 75px, black calc(100% - 75px), transparent 100%);
+        mask-mode: alpha;
+    }
+
+    .zt-tab-bar-mask-right {
+        mask-image: linear-gradient(90deg, black calc(100% - 75px), transparent 100%);
+        mask-mode: alpha;
+    }
+
+    .zt-tab-bar-mask-left {
+        mask-image: linear-gradient(90deg, transparent 0px, black 75px);
+        mask-mode: alpha;
+    }
+}
