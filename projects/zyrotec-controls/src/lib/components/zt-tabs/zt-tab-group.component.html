@@ -22,7 +22,7 @@
                 #tabBarItem
                 class="zt-tab-bar-item"
                 *ngFor="let tab of tabs; index as i"
-                (click)="onSelectTab(tab, tabBarItem)"
+                (click)="onSelectTab(tab, tabBarItem, i)"
                 [ngClass]="{'zt-tab-bar-item-focused' : tab.isActive}"
             >
                 {{ tab.label || 'Tab' + i }}
@@ -64,13 +64,12 @@
     <div
         class="zt-tab-content-container"
         *ngFor="let tab of tabs; index as i"
+        [@ztTabContentSlide]="selectedTabIndex"
     >
         <div
             #tabContent
-            ztTabContent
             class="zt-tab-content"
             *ngIf="tab.isActive"
-            (changeTabContentWrapperHeight)="setTabContentWrapperHeight($event, tabContentWrapper, tabContent)"
         >
             <ng-container [ngTemplateOutlet]="tab.content"></ng-container>
         </div>

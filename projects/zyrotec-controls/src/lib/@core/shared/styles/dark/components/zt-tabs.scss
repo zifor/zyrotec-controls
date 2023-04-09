@@ -113,6 +113,7 @@
 }
 
 .zt-tab-content-wrapper {
+    display: grid;
     position: relative;
     width: 100%;
     padding: 8px;
@@ -121,10 +122,11 @@
     box-sizing: border-box;
     overflow: hidden !important;
 
-    transition: all 0.3s ease-in-out;
-
     .zt-tab-content-container {
-        // position: absolute;
+        float: left;
+        position: relative;
+        grid-column: 1;
+        grid-row: 1;
         width: 100%;
         box-sizing: border-box;
 

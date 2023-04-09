@@ -2,12 +2,19 @@ import { Component, ContentChildren, QueryList, OnInit, AfterContentInit, Elemen
 import { ZtTabComponent } from './zt-tab/zt-tab.component';
 import { ElementBoundsService } from '../../@core/services/element-bounds.service';
 import { Observable, Subject, Subscription, debounceTime, fromEvent, takeUntil } from 'rxjs';
-import { DomPortal, Portal } from '@angular/cdk/portal';
+import { slideInOutLeft, slideInOutRight } from '../../@core/common/zt-animations'
+import { trigger, transition } from '@angular/animations';
 
 @Component({
     selector: 'zt-tab-group',
     templateUrl: './zt-tab-group.component.html',
-    styleUrls: ['./zt-tab-group.component.scss']
+    styleUrls: ['./zt-tab-group.component.scss'],
+    animations: [
+        trigger('ztTabContentSlide', [
+            transition(':increment', slideInOutRight),
+            transition(':decrement', slideInOutLeft)
+        ])
+    ]
 })
 export class ZtTabGroupComponent implements OnInit, OnDestroy, AfterContentInit, AfterViewInit
 {
@@ -97,7 +104,7 @@ export class ZtTabGroupComponent implements OnInit, OnDestroy, AfterContentInit,
     ///
     ///Changes Active Tabs
     ///
-    public onSelectTab(tab: ZtTabComponent, tabBarItem: HTMLButtonElement): void
+    public onSelectTab(tab: ZtTabComponent, tabBarItem: HTMLButtonElement, index: number): void
     {
         let tabsArray = this.tabs.toArray();
 
@@ -107,6 +114,8 @@ export class ZtTabGroupComponent implements OnInit, OnDestroy, AfterContentInit,
         }
 
         tab.isActive = true;
+
+        this.selectedTabIndex = index;
 
         this.tabBarSliderWidth = tabBarItem.clientWidth;
         this.tabBarItemSliderOffsetLeft = tabBarItem.offsetLeft;
@@ -272,15 +281,5 @@ export class ZtTabGroupComponent implements OnInit, OnDestroy, AfterContentInit,
             width: `${this.tabBarSliderWidth}px`,
             transform: `translate(${this.tabBarItemSliderOffsetLeft}px)`
         }
-    }
-
-    ///
-    ///Set tab height on tab change
-    ///
-    public setTabContentWrapperHeight(event: any, tabContentWrapper: HTMLElement, tabContent: HTMLElement): void
-    {
-        // tabContent.style.width = `${parseInt(getComputedStyle(tabContent).getPropertyValue('width').split('px').filter(x => x)[0]) - parseInt(getComputedStyle(tabContentWrapper).getPropertyValue('padding').split('px').filter(x => x)[0])}px`
-        // tabContentWrapper.style.maxHeight = `${event + 2 * parseInt(getComputedStyle(tabContentWrapper).getPropertyValue('padding').split('px').filter(x => x)[0])}px`;
-        // tabContentWrapper.style.minHeight = `${event + 2 * parseInt(getComputedStyle(tabContentWrapper).getPropertyValue('padding').split('px').filter(x => x)[0])}px`;
     }
 }
