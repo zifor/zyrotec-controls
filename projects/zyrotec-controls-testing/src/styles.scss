@@ -1,3 +1,5 @@
+@import '../../zyrotec-controls/src/lib/@core/shared/styles/zt-components-styles.scss';
+
 * {
     padding: 0;
     margin: 0;
@@ -34,12 +36,15 @@ body {
             h4 {
                 color: rgb(200, 200, 200);
                 text-indent: 15px;
+                font-size: 12pt;
             }
         }
 
         section {
+            padding: 8px;
             height: 100%;
             width: 100%;
+            box-sizing: border-box;
         }
 
         footer {

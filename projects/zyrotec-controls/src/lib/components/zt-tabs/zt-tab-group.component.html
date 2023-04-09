@@ -1,0 +1,77 @@
+<div class="zt-tab-bar-container">
+    <button
+        class="zt-tab-bar-scroll-button zt-tab-bar-scroll-button-left"
+        (click)="onScrollTabBarLeft()"
+        *ngIf="isScrollLeftButtonVisible"
+    >
+        <i class="bi bi-chevron-left"></i>
+    </button>
+
+    <div
+        #tabBarWrapper
+        class="zt-tab-bar-wrapper"
+        [ngClass]="{
+            'zt-tab-bar-mask' : isLeftRightMask,
+            'zt-tab-bar-mask-left' : isLeftMask,
+            'zt-tab-bar-mask-right' : isRightMask
+        }"
+        (scroll)="onScroll(tabBarWrapper)"
+    >
+        <div class="zt-tab-bar">
+            <button
+                #tabBarItem
+                class="zt-tab-bar-item"
+                *ngFor="let tab of tabs; index as i"
+                (click)="onSelectTab(tab, tabBarItem, i)"
+                [ngClass]="{'zt-tab-bar-item-focused' : tab.isActive}"
+            >
+                {{ tab.label || 'Tab' + i }}
+            </button>
+        </div>
+
+        <div class="zt-tab-bar-item-slider-container">
+            <div
+                class="zt-tab-bar-item-slider"
+                [ngStyle]="animateTabBarItemSlider()"
+            ></div>
+        </div>
+
+        <!-- <div class="zt-tab-bar-scroll-overlay">
+            <div
+                class="zt-tab-bar-scroll-overlay-left"
+                *ngIf="true"
+            ></div>
+            <div
+                class="zt-tab-bar-scroll-overlay-right"
+                *ngIf="true"
+            ></div>
+        </div> -->
+    </div>
+
+    <button
+        class="zt-tab-bar-scroll-button zt-tab-bar-scroll-button-right"
+        (click)="onScrollTabBarRight()"
+        *ngIf="isScrollRightButtonVisible"
+    >
+        <i class="bi bi-chevron-right"></i>
+    </button>
+</div>
+
+<div
+    #tabContentWrapper
+    class="zt-tab-content-wrapper"
+>
+    <div
+        class="zt-tab-content-container"
+        *ngFor="let tab of tabs; index as i"
+        [@ztTabContentSlide]="selectedTabIndex"
+    >
+        <div
+            #tabContent
+            class="zt-tab-content"
+            *ngIf="tab.isActive"
+        >
+            <ng-container [ngTemplateOutlet]="tab.content"></ng-container>
+        </div>
+    </div>
+</div>
